@@ -7,7 +7,7 @@ from database import init_db
 from pathlib import Path
 import os
 
-def main(source_dir):
+def main(source_dir): #watchdog
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(message)s',
                         datefmt='%Y-%m-%d %H:%M:%S')
@@ -23,6 +23,7 @@ def main(source_dir):
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
+    # Добавить удаление папки для отслеживания, если она пуста
 
 if __name__ == "__main__":
     default_source_dir = os.path.expanduser('~') + r'\Downloads\saved_files' #изменить, чтобы имя пользователя python определял сам
@@ -32,7 +33,7 @@ if __name__ == "__main__":
     elif user_question == "n":
         source_dir = Path(input("Введите свой путь директории")) #добавить пример директории, проблемы с unicodeescape
 
-    if not source_dir.exists():
+    if not source_dir.exists(): #проверка существует ли эта директория
         source_dir.mkdir(parents=True, exist_ok=True)
 
     main(source_dir)
