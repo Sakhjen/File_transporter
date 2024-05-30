@@ -14,3 +14,4 @@ DEFAULT_DEST_DIRS = {
     '.pdf': r"D:\Projects\sorted_files\PDF",
     '.jpg': r"D:\Projects\sorted_files\JPEG"
 }
+#TODO: переписать под .env python-dotenv
