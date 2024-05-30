@@ -22,8 +22,7 @@ class MoveHandler(FileSystemEventHandler):
             log_movement(filename, src_path, dest_path) #Запись в бд
             print(f'Moved {filename} to {dest_path}') 
         else:
-            print(f'No destination specified for {ext} files')
-
-if __name__ == "__main__": #А это что я тут написал??
-    event_handler = MoveHandler()
-    event_handler.on_created("example_file.txt")
+            if ext == ".crdownload":
+                pass
+            else:
+                print(f'No destination specified for {ext} files')

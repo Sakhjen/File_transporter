@@ -6,6 +6,8 @@ from config import source_dir
 from database import init_db
 from pathlib import Path
 import os
+import sys
+from send2trash import send2trash
 
 def main(source_dir): #watchdog
     logging.basicConfig(level=logging.INFO,
@@ -20,8 +22,20 @@ def main(source_dir): #watchdog
     try:
         while True:
             time.sleep(1)
+            user_exit = input("Введите exit, чтобы выйти из программы\n")
+            if user_exit == "exit":
+                count_del_files = 0
+                for file in os.listdir(path):
+                    file_path = os.path.join(path, file)
+                    send2trash(file_path)
+                    count_del_files += 1 
+                print(f"Удалено {count_del_files} файлов")
+                os.rmdir(path)
+                sys.exit()
+                
     except KeyboardInterrupt:
         observer.stop()
+        os.rmdir(path)
     observer.join()
     # Добавить удаление папки для отслеживания, если она пуста
 
